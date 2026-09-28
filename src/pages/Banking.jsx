@@ -97,7 +97,7 @@ export default function Banking() {
                   <Typography variant="body2" color="text.secondary">{t('banking.continueAppText')}</Typography>
                 </Box>
               </Stack>
-              <AppLink product={{ ...appHome, passthrough: 'source=web_banking' }} placement="banking_home" fullWidth variant="contained" color="secondary" sx={{ mt: 2, color: '#0B3B30' }}>
+              <AppLink product={{ ...appHome, passthrough: { source: 'web_banking' } }} placement="banking_home" fullWidth variant="contained" color="secondary" sx={{ mt: 2, color: '#0B3B30' }}>
                 {t('login.appBannerCta')}
               </AppLink>
             </Card>

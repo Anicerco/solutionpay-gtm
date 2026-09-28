@@ -12,16 +12,15 @@ function currentLang() {
   return document.documentElement.lang || 'es';
 }
 
-// _dl / _ddl: deeplink del producto. _p: passthrough del producto + idioma del
-// sitio + user_id si el usuario está logueado (la app lo usa como Custom User ID).
+// _dl / _ddl: deeplink del producto. _p: passthrough en JSON (formato de la guía
+// de Singular Links) con los datos del producto + idioma del sitio + user_id si
+// el usuario está logueado (la app lo usa como Custom User ID).
 export function buildProductLink(product, lang = currentLang(), userId = currentUserId()) {
-  const passthrough = new URLSearchParams(product.passthrough);
-  passthrough.set('lang', lang);
-  if (userId) passthrough.set('uid', userId);
+  const passthrough = { ...product.passthrough, lang, ...(userId ? { uid: userId } : {}) };
   const params = new URLSearchParams({
     _dl: product.deeplink,
     _ddl: product.deeplink,
-    _p: passthrough.toString(),
+    _p: JSON.stringify(passthrough),
     _smtype: '3',
   });
   return `${SINGULAR_BASE_LINK}?${params.toString()}`;
@@ -65,7 +64,7 @@ export function trackEvent(event, attributes = {}) {
 //  - 'native_href': navega el <a> con el link base (sin SDK o ctrl-click).
 export function trackWebToAppClick(product, placement, baseLink, handler) {
   trackEvent('singular_web_to_app_click', {
-    w2a_product: product.slug,
+    w2a_product: product.key,
     w2a_placement: placement,
     w2a_deeplink: product.deeplink,
     w2a_base_link: baseLink,
