@@ -43,9 +43,21 @@ export function pushDataLayer(payload) {
 
 // Evento de funnel web (GTM lo mapea a singularSdk.event / login / logout).
 // Si el usuario está logueado, todos los eventos llevan su user_id.
+// GTM recuerda cada clave del dataLayer hasta que se vuelve a pushear, así que
+// las claves de web-to-app se limpian en cada evento: si no, un sng_logout
+// posterior a un click en "Pedir tarjeta" heredaría product=tarjeta.
 export function trackEvent(event, attributes = {}) {
   const userId = currentUserId();
-  pushDataLayer({ event, language: currentLang(), ...(userId ? { user_id: userId } : {}), ...attributes });
+  pushDataLayer({
+    event,
+    language: currentLang(),
+    user_id: userId || undefined,
+    w2a_product: undefined,
+    w2a_placement: undefined,
+    w2a_base_link: undefined,
+    w2a_handler: undefined,
+    ...attributes,
+  });
 }
 
 // Click en un link web-to-app. handler:

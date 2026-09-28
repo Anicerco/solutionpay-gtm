@@ -19,9 +19,12 @@ export default function Login() {
   const [form, setForm] = useState({ username: '', password: '', name: '', email: '' });
   const [started, setStarted] = useState(false);
 
+  // Una sola vista por entrada a la página (cambiar de pestaña no la repite).
+  // Si ya hay sesión, la página redirige a /banca y no cuenta como vista.
   useEffect(() => {
-    trackEvent('login_view', { mode });
-  }, [mode]);
+    if (!user) trackEvent('login_view');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (user) return <Navigate to="/banca" replace />;
 
