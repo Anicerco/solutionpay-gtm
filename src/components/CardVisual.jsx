@@ -30,7 +30,7 @@ export default function CardVisual({ sx, gradient = 'linear-gradient(135deg, #5B
       <Box sx={{ position: 'relative' }}>
         <Typography sx={{ fontFamily: 'monospace', fontSize: 18, letterSpacing: 2 }}>•••• •••• •••• 4821</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 0.5, fontSize: 12, opacity: 0.85 }}>
-          <span>ANA DEMO</span>
+          <span>DEMO</span>
           <span>09/30</span>
         </Box>
       </Box>
