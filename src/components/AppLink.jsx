@@ -10,10 +10,12 @@ import { useSession } from '../lib/session';
 // tag "Singular - Open App" llama a singularSdk.openApp(baseLink), que agrega los
 // parámetros web (utm, wp_) y redirige. Sin SDK, el <a> navega al link base.
 // Ctrl/Cmd/Shift-click se deja pasar (abrir en otra pestaña).
-export default function AppLink({ product, placement, component: Component = Button, children, ...props }) {
+// baseLink (opcional): link fijo para un botón puntual, en lugar del que arma
+// buildProductLink. Igual pasa por el tag Open App, que le agrega _web_params.
+export default function AppLink({ product, placement, baseLink, component: Component = Button, children, ...props }) {
   const { lang } = useI18n();
   const { user } = useSession();
-  const href = buildProductLink(product, lang, user?.userId);
+  const href = baseLink || buildProductLink(product, lang, user?.userId);
 
   return (
     <Component

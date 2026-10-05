@@ -29,7 +29,15 @@ function Hero() {
             </Typography>
             <Typography variant="h6" color="text.secondary" sx={{ mt: 2, fontWeight: 500, maxWidth: 480 }}>{t('hero.subtitle')}</Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
-              <AppLink product={findProduct('tarjeta')} placement="hero" size="large" variant="contained" endIcon={<ArrowForwardIcon />}>
+              {/* Link fijo con psn / psid (Publisher Site Name / ID) para identificar este botón en los reportes */}
+              <AppLink
+                product={findProduct('tarjeta')}
+                placement="hero"
+                baseLink="https://sedemo.sng.link/Etb40/egye?_smtype=3&_dl=singular-android%3A%2F%2Ftarjeta&_ddl=singular-android%3A%2F%2Ftarjeta&psn=tarjeta&psid=home"
+                size="large"
+                variant="contained"
+                endIcon={<ArrowForwardIcon />}
+              >
                 {t('hero.ctaCard')}
               </AppLink>
               <AppLink product={findProduct('cuenta')} placement="hero" size="large" variant="outlined">
