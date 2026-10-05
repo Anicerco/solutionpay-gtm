@@ -15,12 +15,15 @@ function currentLang() {
 // _dl / _ddl: deeplink del producto. _p: passthrough en JSON (formato de la guía
 // de Singular Links) con los datos del producto + idioma del sitio + user_id si
 // el usuario está logueado (la app lo usa como Custom User ID).
+export function buildPassthrough(product, lang = currentLang(), userId = currentUserId()) {
+  return JSON.stringify({ ...product.passthrough, lang, ...(userId ? { uid: userId } : {}) });
+}
+
 export function buildProductLink(product, lang = currentLang(), userId = currentUserId()) {
-  const passthrough = { ...product.passthrough, lang, ...(userId ? { uid: userId } : {}) };
   const params = new URLSearchParams({
     _dl: product.deeplink,
     _ddl: product.deeplink,
-    _p: JSON.stringify(passthrough),
+    _p: buildPassthrough(product, lang, userId),
     _smtype: '3',
   });
   return `${SINGULAR_BASE_LINK}?${params.toString()}`;
