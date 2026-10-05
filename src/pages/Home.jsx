@@ -33,7 +33,7 @@ function Hero() {
               <AppLink
                 product={findProduct('tarjeta')}
                 placement="hero"
-                baseLink="https://sedemo.sng.link/Etb40/egye?_smtype=3&_dl=singular-android%3A%2F%2Ftarjeta&_ddl=singular-android%3A%2F%2Ftarjeta&psn=tarjeta&psid=home"
+                baseLink="https://sedemo.sng.link/Etb40/egye?_smtype=3&_dl=singular-android%3A%2F%2Ftarjeta&_ddl=singular-android%3A%2F%2Ftarjeta&psn=tarjeta&psid=home&pcn=tarjeta&pcid=home"
                 size="large"
                 variant="contained"
                 endIcon={<ArrowForwardIcon />}
